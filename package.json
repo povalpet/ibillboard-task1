@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "~4.x",
-    "express-validator": "*"
+    "express-validator": "*",
+    "winston":"*"
   },
   "devDependencies": {
     "chai": "*",
