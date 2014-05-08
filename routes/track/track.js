@@ -17,8 +17,7 @@ module.exports = function(){
     if(req.query.count) {
       this.redis.save(parseInt(req.query.count,10));
     }
-
-    this.trackModel.save(req.query, function(err,done){
+    this.trackModel.save(__dirname+'/../../data/trackData.js',req.query, function(err){
       if(err) {
         return next(err);
       }

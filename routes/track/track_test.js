@@ -11,7 +11,7 @@ describe('Unit - TrackRoute',function(){
       save: function(){}
     };
     modelMock = {
-      save: function(values,callback) {
+      save: function(filepath,values,callback) {
         callback(null,true);
       }
     };
@@ -66,7 +66,7 @@ describe('Unit - TrackRoute',function(){
       request(app)
         .get('/track?count=2&foo=bar')
         .end(function(){
-          assert.isTrue(modelMock.save.calledWith({count:'2',foo:'bar'}));
+          assert.isTrue(modelMock.save.calledWith(__dirname+'/../../data/trackData.js',{count:'2',foo:'bar'}));
         });
     });
   });

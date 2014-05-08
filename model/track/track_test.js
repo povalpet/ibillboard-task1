@@ -31,7 +31,7 @@ describe('Unit - TrackModel', function(){
       assert.isTrue(fsMock.appendFile.called);
     });
     it('should call fs.appendFile with providet arguments', function(){
-      assert.isTrue(fsMock.appendFile.calledWith('filepath',data,callback));
+      assert.isTrue(fsMock.appendFile.calledWith('filepath',JSON.stringify(data)+'\n',callback));
     });
   });
 });

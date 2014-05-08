@@ -13,7 +13,7 @@ module.exports = function(){
    * @param  {Function} callback [description]
    */
   TrackModel.prototype.save = function(filepath,data,callback) {
-    this.fs.appendFile(filepath,data,callback);
+    this.fs.appendFile(filepath,JSON.stringify(data)+'\n',callback);
   };
 
   return TrackModel;
