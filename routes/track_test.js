@@ -1,25 +1,24 @@
-var TrackRoute,request,express,app;
+var TrackRoute,request,express;
 request = require('supertest');
 express = require('express');
 TrackRoute = require('./track');
 
 describe('Unit - TrackRoute',function(){
-  var instance, redisMock, modelMock;
+  var instance, redisMock, modelMock,app;
 
   beforeEach(function(){
     redisMock = {
-      save: spy()
+      save: function(){}
     };
     modelMock = {
       save: function(values,callback) {
         callback(null,true);
       }
     };
+    spy(redisMock,'save');
     spy(modelMock,'save');
   });
-
   beforeEach(function(){
-    app = express();
     instance = new TrackRoute(redisMock,modelMock);
   });
 
@@ -29,6 +28,7 @@ describe('Unit - TrackRoute',function(){
 
   describe('method handleGet', function(){
     beforeEach(function(){
+      app = express();
       app.get('/track',instance.handleGet);
     });
     it('should be a function', function(){
@@ -38,12 +38,14 @@ describe('Unit - TrackRoute',function(){
       request(app)
         .get('/track')
         .expect('Content-Type', /json/)
-        .expect(200,done);
+        .expect(200)
+        .end(done);
     });
     it('should return query parameters', function(done){
       request(app)
         .get('/track?count=2&foo=bar')
-        .expect({count:2,foo:'bar'},done);
+        .expect({count:2,foo:'bar'})
+        .end(done);
     });
     it('should call redis.save method when count query defined',function(){
       request(app)
@@ -66,7 +68,6 @@ describe('Unit - TrackRoute',function(){
           assert.isTrue(redisMock.save.calledWith(2));
         });
     });
-
     it('should model.save method', function(){
       request(app)
         .get('/track?count=2')
