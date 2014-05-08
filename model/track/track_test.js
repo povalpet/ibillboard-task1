@@ -11,4 +11,10 @@ describe('Unit - TrackModel', function(){
   it('should be initialized', function(){
     assert.instanceOf(instance,TrackModel);
   });
+
+  describe('method save', function(){
+    it('should be a function', function(){
+      assert.isFunction(instance.save);
+    });
+  });
 });
