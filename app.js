@@ -35,6 +35,8 @@ onServerError = function(err) {
 
 server = http.createServer(app);
 
+server.on('error',onServerError);
+
 server.listen(process.env.PORT || app.get('port'), function() {
   return typeof logger !== "undefined" && logger !== null ? logger.info("Express server listening on port " + app.get('port')) : void 0;
 });
