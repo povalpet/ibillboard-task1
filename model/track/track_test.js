@@ -2,10 +2,15 @@ var TrackModel;
 TrackModel = require('./track');
 
 describe('Unit - TrackModel', function(){
-  var instance;
+  var instance,fsMock;
 
   beforeEach(function(){
-    instance = new TrackModel();
+    fsMock = {};
+    fsMock.appendFile = spy();
+  });
+
+  beforeEach(function(){
+    instance = new TrackModel(fsMock);
   });
 
   it('should be initialized', function(){
@@ -13,8 +18,20 @@ describe('Unit - TrackModel', function(){
   });
 
   describe('method save', function(){
+    var callback,data;
+    beforeEach(function(){
+      callback = function(){};
+      data = {foo:'bar'};
+      instance.save('filepath',data,callback);
+    });
     it('should be a function', function(){
       assert.isFunction(instance.save);
+    });
+    it('should call fs.appendFile method',function(){
+      assert.isTrue(fsMock.appendFile.called);
+    });
+    it('should call fs.appendFile with providet arguments', function(){
+      assert.isTrue(fsMock.appendFile.calledWith('filepath',data,callback));
     });
   });
 });

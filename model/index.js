@@ -1,10 +1,11 @@
-var track;
+var track,fs;
 
+fs = require('fs');
 TrackModel = require('./track');
 RedisModel = require('./redis');
 
 module.exports = function(services){
-  track = new TrackModel();
+  track = new TrackModel(fs);
   redis = new RedisModel(services.redis);
 
   return {
