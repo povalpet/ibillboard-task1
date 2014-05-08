@@ -1,13 +1,16 @@
-var express,http,servicesFactory,routes;
+var express,http,servicesFactory,routes,modelFactory;
 
 express = require('express');
 http = require('http');
 servicesFactory = require('./services');
 routes = require('./routes');
+modelFactory = require('./model');
 
-var app,services;
+var app,services,model;
 
 services = servicesFactory.create();
+model = modelFactory();
+
 global.logger = services.logger;
 
 app = express();
@@ -15,7 +18,7 @@ app.set('mode', process.env.NODE_ENV || 'development');
 
 app.set('port',3000);
 
-routes.register(app);
+routes.register(app,model);
 
 var server,onServerError;
 

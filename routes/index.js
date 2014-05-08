@@ -4,8 +4,8 @@ TrackRoute = require('./track');
 
 var create;
 
-create = function() {
-  var track = new TrackRoute();
+create = function(model) {
+  var track = new TrackRoute(model.redis,model.track);
   return {
     track:track
   };
@@ -16,7 +16,7 @@ registerRoutes = function(app, routes) {
   app.get('/track',routes.track.handleGet);
 };
 
-exports.register = function(app) {
-  var routes = create();
+exports.register = function(app,model) {
+  var routes = create(model);
   registerRoutes(app, routes);
 };
