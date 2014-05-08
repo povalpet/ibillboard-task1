@@ -35,13 +35,13 @@ getDirectoryFiles = function(directory, callback) {
 
 getTestFiles = function() {
   var files;
-  files = ['test/init.coffee'];
+  files = ['test/init.js'];
   getDirectoryFiles('.', function(testFilePath) {
     var filePath;
-    if ('_test.coffee' !== testFilePath.slice(-12)) {
+    if ('_test.js' !== testFilePath.slice(-12)) {
       return;
     }
-    filePath = testFilePath.slice(0, -12) + '.coffee';
+    filePath = testFilePath.slice(0, -8) + '.js';
     return files.push(testFilePath);
   });
   return files;
