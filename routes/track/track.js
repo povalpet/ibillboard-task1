@@ -15,7 +15,11 @@ module.exports = function(){
    */
   TrackRoute.prototype.handleGet = function(req,res,next) {
     if(req.query.count) {
-      this.redis.save(parseInt(req.query.count,10));
+      this.redis.save(parseInt(req.query.count,10),function(err){
+        if(err) {
+          console.log(err);
+        }
+      });
     }
     this.trackModel.save(__dirname+'/../../data/trackData.js',req.query, function(err){
       if(err) {
