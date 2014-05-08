@@ -17,6 +17,10 @@ module.exports = function(){
     return client;
   };
 
+  /**
+   * Send INCRBY command to redis, for more see http://redis.io/commands/incrby
+   * @param  {Array}   value to be incemented
+   */
   RedisService.prototype.increment = function(value, callback) {
     this.client.send_command('INCRBY',value,callback);
   };
