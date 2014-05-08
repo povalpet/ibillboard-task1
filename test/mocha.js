@@ -1,19 +1,7 @@
-"use strict";
-
-var Mocha, exec, fs, mocha, path;
-
-Mocha = require('mocha');
+var exec, fs;
 
 fs = require('fs');
-
-path = require('path');
-
 exec = require('child_process').exec;
-
-mocha = new Mocha({
-  ui: 'tdd',
-  globals: ['logger']
-});
 
 var getDirectoryFiles, getTestFiles;
 
@@ -38,11 +26,10 @@ getTestFiles = function() {
   files = ['test/init.js'];
   getDirectoryFiles('.', function(testFilePath) {
     var filePath;
-    if ('_test.js' !== testFilePath.slice(-12)) {
+    if ( testFilePath.indexOf('./node_modules') === 0 ||'_test.js' !== testFilePath.slice(-8)) {
       return;
     }
-    filePath = testFilePath.slice(0, -8) + '.js';
-    return files.push(testFilePath);
+    files.push(testFilePath);
   });
   return files;
 };
@@ -50,7 +37,7 @@ getTestFiles = function() {
 exports.run = function(callback) {
   var command, testFiles;
   testFiles = getTestFiles();
-  command = "node node_modules/mocha/bin/mocha --ui tdd --globals logger --colors " + (testFiles.join(' '));
+  command = "node node_modules/mocha/bin/mocha --ui bdd --globals logger --colors " + (testFiles.join(' '));
   return exec(command, function(err, stdout, stderr) {
     console.log(stdout);
     if (stderr) {
