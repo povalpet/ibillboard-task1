@@ -17,6 +17,7 @@
     "chai": "*",
     "mocha": "*",
     "supervisor": "*",
-    "sinon": "*"
+    "sinon": "*",
+    "supertest":"*"
   }
 }
