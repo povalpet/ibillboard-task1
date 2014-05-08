@@ -9,7 +9,7 @@ modelFactory = require('./model');
 var app,services,model;
 
 services = servicesFactory.create();
-model = modelFactory();
+model = modelFactory(services);
 
 global.logger = services.logger;
 
