@@ -5,7 +5,7 @@ RedisModel = require('./redis');
 
 module.exports = function(services){
   track = new TrackModel();
-  redis = new RedisModel();
+  redis = new RedisModel(services.redis);
 
   return {
     track:track,
