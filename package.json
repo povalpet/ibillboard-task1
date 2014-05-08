@@ -1,0 +1,21 @@
+{
+  "name": "iBillboard-task-1",
+  "version": "0.0.1",
+  "description": "Sample application",
+  "main": "app.js",
+  "scripts": {
+    "start": "supervisor -e node,js --ignore logs dev.js"
+  },
+  "author": "Petr Povala",
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.x",
+    "express-validator": "*"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*",
+    "supervisor": "*",
+    "sinon": "*"
+  }
+}
