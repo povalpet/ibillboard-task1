@@ -34,19 +34,6 @@ describe('Unit - TrackRoute',function(){
     it('should be a function', function(){
       assert.isFunction(instance.handleGet);
     });
-    it('should respond with json', function(done){
-      request(app)
-        .get('/track')
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .end(done);
-    });
-    it('should return query parameters', function(done){
-      request(app)
-        .get('/track?count=2&foo=bar')
-        .expect({count:2,foo:'bar'})
-        .end(done);
-    });
     it('should call redis.save method when count query defined',function(){
       request(app)
         .get('/track?count=2')
