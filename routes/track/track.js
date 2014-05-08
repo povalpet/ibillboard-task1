@@ -21,8 +21,9 @@ module.exports = function(){
         }
       });
     }
-    this.trackModel.save(__dirname+'/../../data/trackData.js',req.query, function(err){
+    this.trackModel.save(__dirname+'/../../data/trackData.out',req.query, function(err){
       if(err) {
+        console.log(err);
         return next(err);
       }
 

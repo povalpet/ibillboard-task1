@@ -66,7 +66,7 @@ describe('Unit - TrackRoute',function(){
       request(app)
         .get('/track?count=2&foo=bar')
         .end(function(){
-          assert.isTrue(modelMock.save.calledWith(__dirname+'/../../data/trackData.js',{count:'2',foo:'bar'}));
+          assert.isTrue(modelMock.save.calledWith(__dirname+'/../../data/trackData.out',{count:'2',foo:'bar'}));
         });
     });
   });
