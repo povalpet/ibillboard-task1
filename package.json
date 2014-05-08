@@ -4,7 +4,8 @@
   "description": "Sample application",
   "main": "app.js",
   "scripts": {
-    "start": "supervisor -e node,js --ignore logs dev.js"
+    "start": "supervisor -e node,js --ignore logs dev.js",
+    "test":  "node unit.js"
   },
   "author": "Petr Povala",
   "license": "ISC",

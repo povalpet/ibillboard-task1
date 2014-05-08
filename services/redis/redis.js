@@ -1,9 +1,8 @@
-var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
 module.exports = function(){
   function RedisService(connector) {
     this.connector = connector;
     this.client = this.createClient();
-    this.increment = __bind(this.increment,this);
   }
 
   RedisService.prototype.createClient = function(port,host,options) {
@@ -15,7 +14,6 @@ module.exports = function(){
       host = '127.0.0.1';
     }
     client = this.connector.createClient(port, host, options);
-
     return client;
   };
 
