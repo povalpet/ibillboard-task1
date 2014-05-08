@@ -1,14 +1,24 @@
-module.exports = function(){
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-  function TrackRoute() {
-    // this.trackModel = trackModel;
+module.exports = function(){
+  function TrackRoute(redis,trackModel) {
+    this.redis = redis;
+    this.trackModel = trackModel;
+    this.handleGet = __bind(this.handleGet, this);
   }
 
-
   TrackRoute.prototype.handleGet = function(req,res,next) {
-    console.log('ASFGH');
-    res.end();
-  };
+    if(req.query.count) {
+      this.redis.save(parseInt(req.query.count,10));
+    }
 
+    this.trackModel.save(req.query, function(err,done){
+      if(err) {
+        return next(err);
+      }
+
+      res.send(req.query);
+    });
+  };
   return TrackRoute;
 }();
